@@ -1,0 +1,13 @@
+.wallet-adapter-button.button-style {
+	background-color: rgb(223, 141, 74);
+}
+
+.wallet-adapter-button.button-style:hover {
+	background-color: rgb(221, 110, 19);
+}
+
+.nav-font-style {
+	background-color: "#5800FF";
+	font-weight: "bolder";
+	font-size: 20px;
+}

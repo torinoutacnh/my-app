@@ -1,0 +1,68 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ES2020",
+    ],
+    "rootDir": "./src",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ES2020",
+    "target": "ES2020",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false,
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "types": [
+      "node"
+    ],
+    "outDir": "dist"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "shared-config"
+    ],
+    "rules": {
+      "additional-rule": "warn"
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/*.ts?(x)"
+        ],
+        "rules": {
+          "additional-typescript-only-rule": "warn"
+        }
+      }
+    ]
+  },
+  "include": [
+    "src"
+  ],
+  "ts-node": {
+    "cwd": "/d/project",
+    "projectSearchDir": "/d/project",
+    "require": [],
+    "project": "/d/project/tsconfig.json",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./typings"
+    ],
+    "transpileOnly": true,
+    "moduleTypes": {
+      "webpack.config.ts": "cjs",
+      // Globs are also supported with the same behavior as tsconfig "include"
+      "webpack-config-scripts/**/*": "cjs"
+    }
+  }
+}
