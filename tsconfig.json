@@ -5,6 +5,7 @@
       "dom.iterable",
       "ES2020",
     ],
+    "strictNullChecks":false,
     "rootDir": "./src",
     "allowJs": true,
     "skipLibCheck": true,

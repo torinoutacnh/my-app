@@ -1,6 +1,6 @@
 import * as web3 from "@solana/web3.js";
 import * as splToken from "@solana/spl-token";
-import { SignerWalletAdapter } from "@solana/wallet-adapter-base";
+import { WalletContextState } from "@solana/wallet-adapter-react";
 
 // system seed
 const secrectKey = (process.env.REACT_APP_SYSTEM_KEYPAIR || "").split(",");
@@ -10,8 +10,8 @@ export const systemAddress = web3.Keypair.fromSecretKey(
     Uint8Array.from(arrayOfNumbers)
 );
 
-const sftAddress = new web3.PublicKey(process.env.REACT_APP_SFT_TOKEN_CREATOR || "");
-const smwAddress = new web3.PublicKey(process.env.REACT_APP_SMW_TOKEN_CREATOR || "");
+export const sftAddress = new web3.PublicKey(process.env.REACT_APP_SFT_TOKEN_CREATOR || "");
+export const smwAddress = new web3.PublicKey(process.env.REACT_APP_SMW_TOKEN_CREATOR || "");
 
 // create NFT token
 export const NFTToken = (connection: web3.Connection, nftAddress: String) => {
@@ -57,7 +57,7 @@ export const tokenInstruction = (
     from: web3.PublicKey,
     amount = 0
 ) => {
-    const transfer = amount === 0 ? new splToken.u64(amount) : (web3.LAMPORTS_PER_SOL * amount)
+    const transfer = amount === 0 ? new splToken.u64(1) : (web3.LAMPORTS_PER_SOL * amount)
     const instruction = splToken.Token.createTransferInstruction(
         splToken.TOKEN_PROGRAM_ID,
         fromTokenAccount.address,
@@ -70,121 +70,56 @@ export const tokenInstruction = (
 };
 // transfer token
 export const transferTokenInstruction = async (
-    wallets,
-    connection,
-    toAddress = [],
-    amount
+    fromPublickey: web3.PublicKey,
+    toPublickey: web3.PublicKey,
+    connection: web3.Connection,
+    tokenMinterPublickey: web3.PublicKey,
+    amount: number = 0
 ) => {
     var instructions = [];
-    var from = wallets.publicKey;
     // Construct my token class
-    var customToken = new splToken.Token(
+    const customToken = new splToken.Token(
         connection,
-        mintAddress,
+        tokenMinterPublickey,
         splToken.TOKEN_PROGRAM_ID,
-        from
+        systemAddress
     );
     // Create associated token accounts for my token if they don't exist yet
-    var fromTokenAccount = await customToken.getOrCreateAssociatedAccountInfo(
-        from
+    const fromTokenAccount = await customToken.getOrCreateAssociatedAccountInfo(
+        fromPublickey
     );
-    var toTokenAccounts = [];
-    for (var address of toAddress) {
-        var to = new web3.PublicKey(address);
-        var toTokenAccount = await splToken.Token.getAssociatedTokenAddress(
-            customToken.associatedProgramId,
-            customToken.programId,
-            customToken.publicKey,
-            to
-        );
-        const receiverAccount = await connection.getAccountInfo(toTokenAccount);
-        if (receiverAccount === null) {
-            instructions.push(
-                splToken.Token.createAssociatedTokenAccountInstruction(
-                    customToken.associatedProgramId,
-                    customToken.programId,
-                    mintAddress,
-                    toTokenAccount,
-                    to,
-                    from
-                )
-            );
-        }
-        toTokenAccounts.push(toTokenAccount);
-    }
-
-    var tokeninstruction = tokenInstruction(
-        fromTokenAccount,
-        toTokenAccounts,
-        from,
-        amount
-    );
-    instructions.push(...tokeninstruction);
-    return instructions;
-};
-// swap sol token
-export const tokenSwap = async (
-    connection,
-    wallets,
-    solAmount,
-    tokenAmount
-) => {
-    var tranSol = await transferSolInstruction(
-        wallets,
-        [systemAddress.publicKey.toBase58()],
-        solAmount
-    );
-
-    var instructions = [];
-    var from = systemAddress.publicKey;
-    // Construct my token class
-    var customToken = new splToken.Token(
-        connection,
-        mintAddress,
-        splToken.TOKEN_PROGRAM_ID,
-        from
-    );
-    // Create associated token accounts for my token if they don't exist yet
-    var fromTokenAccount = await customToken.getOrCreateAssociatedAccountInfo(
-        from
-    );
-
-    var to = wallets.publicKey;
-    var toTokenAccount = await splToken.Token.getAssociatedTokenAddress(
+    const toTokenAccount = await splToken.Token.getAssociatedTokenAddress(
         customToken.associatedProgramId,
         customToken.programId,
         customToken.publicKey,
-        to
+        toPublickey
     );
     const receiverAccount = await connection.getAccountInfo(toTokenAccount);
     if (receiverAccount === null) {
-        instructions.add(
+        instructions.push(
             splToken.Token.createAssociatedTokenAccountInstruction(
                 customToken.associatedProgramId,
                 customToken.programId,
-                mintAddress,
+                tokenMinterPublickey,
                 toTokenAccount,
-                to,
-                systemAddress.publicKey
+                toPublickey,
+                fromPublickey
             )
         );
     }
-
-    var tokeninstruction = splToken.Token.createTransferInstruction(
-        splToken.TOKEN_PROGRAM_ID,
-        fromTokenAccount.address,
+    // make token transfer instruction
+    var tokeninstruction = tokenInstruction(
+        fromTokenAccount,
         toTokenAccount,
-        systemAddress.publicKey,
-        [],
-        web3.LAMPORTS_PER_SOL * tokenAmount
+        fromPublickey,
+        amount
     );
     instructions.push(tokeninstruction);
-    instructions.push(...tranSol);
     return instructions;
 };
 // create and sign transaction
 export const makeTransaction = async (
-    wallets: SignerWalletAdapter,
+    wallets: WalletContextState,
     connection: web3.Connection,
     instructions: web3.TransactionInstruction[],
     isPartialSign = false
@@ -215,18 +150,17 @@ export const makeTransaction = async (
         console.log(error);
     }
 };
-
-export const getSolBookToken = async (address: string, connection: web3.Connection) => {
+// get token info from wallet
+export const getCustomToken = async (connection: web3.Connection, tokenMintPubkey: web3.PublicKey, from: web3.PublicKey) => {
     try {
-        var from = new web3.PublicKey(address);
         // Construct my token class
         var customToken = new splToken.Token(
             connection,
-            sftAddress,
+            tokenMintPubkey,
             splToken.TOKEN_PROGRAM_ID,
             systemAddress
         );
-        // // Create associated token accounts for my token if they don't exist yet
+        // Create associated token accounts for my token if they don't exist yet
         var fromTokenAccount = await customToken.getOrCreateAssociatedAccountInfo(
             from
         );
@@ -239,9 +173,9 @@ export const getSolBookToken = async (address: string, connection: web3.Connecti
     } catch (error) {
         console.log(error);
     }
-};
-
-export const getSolanaPrice = async () => {
+}
+// get Sol price
+export const getSolPrice = async () => {
     const response = await fetch(
         `https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd`,
         {
@@ -252,54 +186,36 @@ export const getSolanaPrice = async () => {
     const data = await response.json();
     return data.solana.usd;
 };
-
-//transfer nft
-export const transferNFTInstruction = async (
-    wallets,
-    connection,
-    nftpubaddrerss,
-    toAddress = []
-) => {
-    var instructions = [];
-    var from = wallets.publicKey;
-    var mint = new web3.PublicKey(nftpubaddrerss);
-    // Construct my token class
-    var customToken = new splToken.Token(
+// mint nft
+export const mintSplToken = async (connection: web3.Connection, fromWallet: web3.Keypair) => {
+    //create new token mint
+    let mint = await splToken.Token.createMint(
         connection,
-        mint,
+        fromWallet,
+        fromWallet.publicKey,
+        null,
+        9,
         splToken.TOKEN_PROGRAM_ID,
-        from
     );
-    // Create associated token accounts for my token if they don't exist yet
-    var fromTokenAccount = await customToken.getOrCreateAssociatedAccountInfo(
-        from
-    );
-    var toTokenAccounts = [];
-    for (var address of toAddress) {
-        var to = new web3.PublicKey(address);
-        var toTokenAccount = await splToken.Token.getAssociatedTokenAddress(
-            customToken.associatedProgramId,
-            customToken.programId,
-            customToken.publicKey,
-            to
-        );
-        const receiverAccount = await connection.getAccountInfo(toTokenAccount);
-        if (receiverAccount === null) {
-            instructions.push(
-                splToken.Token.createAssociatedTokenAccountInstruction(
-                    customToken.associatedProgramId,
-                    customToken.programId,
-                    mint,
-                    toTokenAccount,
-                    to,
-                    from
-                )
-            );
-        }
-        toTokenAccounts.push(toTokenAccount);
-    }
 
-    var tokeninstruction = nftInstruction(fromTokenAccount, toTokenAccounts, from);
-    instructions.push(...tokeninstruction);
-    return instructions;
-};
+    //get the token account of the fromWallet Solana address, if it does not exist, create it
+    let fromTokenAccount = await mint.getOrCreateAssociatedAccountInfo(
+        fromWallet.publicKey,
+    );
+
+    //minting 1 new token to the "fromTokenAccount" account we just returned/created
+    await mint.mintTo(
+        fromTokenAccount.address, //who it goes to
+        fromWallet.publicKey, // minting authority
+        [], // multisig
+        web3.LAMPORTS_PER_SOL, // how many
+    );
+    //revoke minting privileges and ensure that we can not create additional tokens of this type : null
+    await mint.setAuthority(
+        mint.publicKey,
+        null,
+        "MintTokens",
+        fromWallet.publicKey,
+        []
+    )
+}
