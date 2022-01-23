@@ -11,15 +11,19 @@ import { transferTokenInstruction, sftAddress, smwAddress, systemAddress, makeTr
 const marketAddress = process.env.REACT_APP_NFT_ADDRESS || "";
 
 const handleBuy = async (endpoint: ConnectionContextState, wallets: WalletContextState, tokenmint: string) => {
-    const instruction: web3.TransactionInstruction[] = [];
+    try {
+        const instruction: web3.TransactionInstruction[] = [];
 
-    const mintPubkey = new web3.PublicKey(tokenmint);
-    const transferNFT = await transferTokenInstruction(systemAddress.publicKey, wallets.publicKey, endpoint.connection, mintPubkey, 0);
-    instruction.push(...transferNFT);
-    const transferSFT = await transferTokenInstruction(wallets.publicKey, systemAddress.publicKey, endpoint.connection, sftAddress, 20);
-    instruction.push(...transferSFT);
-
-    await makeTransaction(wallets, endpoint.connection, instruction, true);
+        const mintPubkey = new web3.PublicKey(tokenmint);
+        const transferNFT = await transferTokenInstruction(systemAddress.publicKey, wallets.publicKey, endpoint.connection, mintPubkey, 0);
+        instruction.push(...transferNFT);
+        const transferSFT = await transferTokenInstruction(wallets.publicKey, systemAddress.publicKey, endpoint.connection, sftAddress, 20);
+        instruction.push(...transferSFT);
+        console.log(instruction);
+        await makeTransaction(wallets, endpoint.connection, instruction, true);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const NFTCard = (metadatadata: metadata.MetadataData) => {
