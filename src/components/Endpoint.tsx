@@ -1,4 +1,4 @@
-import NFT from "./aboutNFT/nft";
+import NFT from "./aboutNFT/NFT";
 import Detail from "./detailNFT/Detail";
 import Home from "./home/Home";
 

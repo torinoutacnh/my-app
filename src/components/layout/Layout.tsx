@@ -3,11 +3,13 @@ import TopNav from "./navbar/TopNav";
 import { Container } from 'react-bootstrap'
 import Footer from "./footer/Footer";
 
+import './Layout.css'
+
 function Layout(props: any) {
     return (
-        <div>
+        <div className="layout-background">
             <TopNav />
-            <Container fluid='md'>
+            <Container fluid className="layout-body">
                 {props.children}
             </Container>
             <Footer />

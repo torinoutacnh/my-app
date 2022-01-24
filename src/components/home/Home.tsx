@@ -1,35 +1,22 @@
 import React, { FC, useEffect, useState } from "react";
 import * as web3 from "@solana/web3.js";
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
-import { CardGroup, Card, Button, Row, Col } from "react-bootstrap";
+import { CardGroup, Card, Button, Row } from "react-bootstrap";
+import { Link } from 'react-router-dom'
 import { ConnectionContextState, useConnection, WalletContextState } from "@solana/wallet-adapter-react";
 import { WalletContext, ConnectionContext } from "@solana/wallet-adapter-react";
 
 import { getWalletNFTs, getMetadataDetail } from '../../transactions/nftMetadata'
-import { transferTokenInstruction, sftAddress, smwAddress, systemAddress, makeTransaction } from "../../transactions/instruction";
+import { buyBySFT } from "../../transactions/instruction";
+
+import "./Home.css";
 
 const marketAddress = process.env.REACT_APP_NFT_ADDRESS || "";
-
-const handleBuy = async (endpoint: ConnectionContextState, wallets: WalletContextState, tokenmint: string) => {
-    try {
-        const instruction: web3.TransactionInstruction[] = [];
-
-        const mintPubkey = new web3.PublicKey(tokenmint);
-        const transferNFT = await transferTokenInstruction(systemAddress.publicKey, wallets.publicKey, endpoint.connection, mintPubkey, 0);
-        instruction.push(...transferNFT);
-        const transferSFT = await transferTokenInstruction(wallets.publicKey, systemAddress.publicKey, endpoint.connection, sftAddress, 20);
-        instruction.push(...transferSFT);
-        console.log(instruction);
-        await makeTransaction(wallets, endpoint.connection, instruction, true);
-    } catch (error) {
-        console.log(error);
-    }
-}
 
 const NFTCard = (metadatadata: metadata.MetadataData) => {
     const [nftdata, setNFTData] = useState<any>({});
     useEffect(() => {
-        getMetadataDetail(metadatadata).then((data) => { setNFTData(data); console.log(data) })
+        getMetadataDetail(metadatadata).then((data) => { setNFTData(data); })
     }, [metadatadata]);
     return (
         <ConnectionContext.Consumer>
@@ -37,26 +24,35 @@ const NFTCard = (metadatadata: metadata.MetadataData) => {
                 <WalletContext.Consumer>
                     {wallets => (
                         <Card style={{ width: '18rem', height: '28.6rem' }}>
-                            {/* {console.log(metadatadata)} */}
                             <Card.Img variant="top" src={nftdata.image} />
                             <Card.Body>
                                 <Card.Title>{nftdata.name}</Card.Title>
-                                <Card.Subtitle>{nftdata.symbol}</Card.Subtitle>
+                                <Card.Subtitle>Symbol : {nftdata.symbol}</Card.Subtitle>
+                                {metadatadata.collection &&
+                                    <Card.Text>
+                                        Collection : {metadatadata.collection}
+                                    </Card.Text>
+                                }
                                 <Card.Text>
-                                    {nftdata.description}
+                                    Description : {nftdata.description}
                                 </Card.Text>
-                                {nftdata.attributes?.map((attribute: any, idx: number) => {
+                                {/* {nftdata.attributes?.map((attribute: any, idx: number) => {
                                     return (
                                         <Card.Subtitle key={idx}>
                                             {attribute.trait_type} : {attribute.value}
                                         </Card.Subtitle>
                                     )
-                                })}
-                                <Button variant="primary"
-                                    onClick={() => handleBuy(endpoint, wallets, metadatadata.mint)}
-                                >
-                                    Buy
-                                </Button>
+                                })} */}
+                                <div style={{ marginTop: 20 }}>
+                                    <Button variant="primary"
+                                        onClick={() => buyBySFT(endpoint, wallets, metadatadata.mint, 20)}
+                                    >
+                                        Buy
+                                    </Button>
+                                    <Button variant="warning" style={{ marginLeft: 10 }}>
+                                        <Link to={"/".concat(metadatadata.mint)} className="link-none">Detail</Link>
+                                    </Button>
+                                </div>
                             </Card.Body>
                         </Card>
                     )}
@@ -77,7 +73,7 @@ const Home: FC = () => {
         <div>
             <h1>Home page</h1>
             <CardGroup>
-                <Row xs={1} md={2} className="g-4">
+                <Row md={3} className="g-4">
                     {metadatas.map((data, idx) => (
                         <NFTCard {...data} key={idx} />
                     ))}

@@ -1,0 +1,10 @@
+.layout-body {
+	padding: 50px;
+	margin: 0;
+	min-height: 85vh;
+	max-width: fit-content;
+}
+
+.layout-background {
+	background-color: #efdad7;
+}

@@ -1,9 +1,11 @@
 import { Col, Container, Row } from "react-bootstrap";
 
+import './Footer.css'
+
 export default function Footer() {
     return (
-        <Container fluid style={{ background: 'black', color: 'white', textAlign: 'center' }}>
-            <Row lg={4} md={2}>
+        <Container fluid className="footer-body">
+            <Row md={4} sm={2}>
                 <Col>
                     <p>hello</p>
                 </Col>

@@ -1,6 +1,6 @@
 import * as web3 from "@solana/web3.js";
 import * as splToken from "@solana/spl-token";
-import { WalletContextState } from "@solana/wallet-adapter-react";
+import { ConnectionContextState, WalletContextState } from "@solana/wallet-adapter-react";
 
 // system seed
 const secrectKey = (process.env.REACT_APP_SYSTEM_KEYPAIR || "").split(",");
@@ -218,4 +218,19 @@ export const mintSplToken = async (connection: web3.Connection, fromWallet: web3
         fromWallet.publicKey,
         []
     )
+}
+// buy with sft
+export const buyBySFT = async (endpoint: ConnectionContextState, wallets: WalletContextState, tokenmint: string, amount: number) => {
+    try {
+        const instruction: web3.TransactionInstruction[] = [];
+
+        const mintPubkey = new web3.PublicKey(tokenmint);
+        const transferNFT = await transferTokenInstruction(systemAddress.publicKey, wallets.publicKey, endpoint.connection, mintPubkey, 0);
+        instruction.push(...transferNFT);
+        const transferSFT = await transferTokenInstruction(wallets.publicKey, systemAddress.publicKey, endpoint.connection, sftAddress, amount);
+        instruction.push(...transferSFT);
+        await makeTransaction(wallets, endpoint.connection, instruction, true);
+    } catch (error) {
+        console.log(error);
+    }
 }
