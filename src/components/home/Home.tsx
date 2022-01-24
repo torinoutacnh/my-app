@@ -23,7 +23,7 @@ const NFTCard = (metadatadata: metadata.MetadataData) => {
             {endpoint => (
                 <WalletContext.Consumer>
                     {wallets => (
-                        <Card style={{ width: '18rem', height: '28.6rem' }}>
+                        <Card style={{ width: '18rem', height: '28.6rem'}}>
                             <Card.Img variant="top" src={nftdata.image} />
                             <Card.Body>
                                 <Card.Title>{nftdata.name}</Card.Title>
