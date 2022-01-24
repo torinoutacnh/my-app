@@ -1,8 +1,6 @@
-import React from 'react';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
 import {
     WalletMultiButton,
-    WalletModalProvider,
 } from '@solana/wallet-adapter-react-ui';
 import { Endpoints } from '../../Endpoint';
 
