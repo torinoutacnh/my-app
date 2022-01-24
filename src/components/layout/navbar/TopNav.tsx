@@ -23,9 +23,12 @@ export default function TopNav() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         {Endpoints.map((endpoint, index) => {
-                            return (
-                                <Nav.Link style={{ color: '#AC3B61', paddingLeft: '10px' }} key={index} href={endpoint.path}>{endpoint.name}</Nav.Link>
-                            )
+                            if (endpoint.isNav) {
+                                return (
+                                    <Nav.Link style={{ color: '#AC3B61', paddingLeft: '10px' }} key={index} href={endpoint.path}>{endpoint.name}</Nav.Link>
+                                )
+                            }
+                            return null;
                         })}
                         {/* <NavDropdown title="Dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
