@@ -8,15 +8,15 @@ import './Nav.css';
 
 export default function TopNav() {
     return (
-        <Navbar style={{ backgroundColor: '#5800FF', fontWeight: 'bolder', fontSize: 20 }} expand="md" sticky='top'>
+        <Navbar style={{ backgroundColor: '#EDC7B7', fontWeight: 'bolder', fontSize: 20 }} expand="md" sticky='top'>
             <Container>
                 <Navbar.Brand href="/">
                     <img
-                        src="https://react-bootstrap.github.io/logo.svg"
-                        width="30"
-                        height="30"
+                        src="https://res.cloudinary.com/design123/image/upload/v1642135260/fboqwxpx15wf9p7hx9to.png"
+                        width="100%"
+                        height="50"
                         className="d-inline-block align-top"
-                        alt="React Bootstrap logo"
+                        alt="FitnessVR"
                     />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -24,7 +24,7 @@ export default function TopNav() {
                     <Nav className="me-auto">
                         {Endpoints.map((endpoint, index) => {
                             return (
-                                <Nav.Link style={{ color: '#EEEEEE' }} key={index} href={endpoint.path}>{endpoint.name}</Nav.Link>
+                                <Nav.Link style={{ color: '#AC3B61', paddingLeft: '10px' }} key={index} href={endpoint.path}>{endpoint.name}</Nav.Link>
                             )
                         })}
                         {/* <NavDropdown title="Dropdown">

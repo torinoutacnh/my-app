@@ -43,13 +43,14 @@ const NFTCard = (metadatadata: metadata.MetadataData) => {
                                         </Card.Subtitle>
                                     )
                                 })} */}
-                                <div style={{ marginTop: 20 }}>
+                                <div style={{ marginTop: 20, textAlign: 'center' }}>
                                     <Button variant="primary"
                                         onClick={() => buyBySFT(endpoint, wallets, metadatadata.mint, 20)}
                                     >
+                                        <i className="fa fa-create"></i>
                                         Buy
                                     </Button>
-                                    <Button variant="warning" style={{ marginLeft: 10 }}>
+                                    <Button variant="warning" style={{ marginLeft: 10, color: '#BAB2B5' }}>
                                         <Link to={"/detail/".concat(metadatadata.mint)} className="link-none">Detail</Link>
                                     </Button>
                                 </div>

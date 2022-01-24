@@ -1,4 +1,4 @@
-import NFT from "./aboutNFT/Nft";
+import NFT from "./aboutNFT/NFT";
 import Home from "./home/Home";
 
 export const Endpoints: IEndpoint[] = [
