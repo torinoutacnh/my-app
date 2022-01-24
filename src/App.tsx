@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from './Provider'
 
 import { Endpoints } from './components/Endpoint'
+import Detail from './components/detailNFT/Detail';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
               <Route key={index} path={endpoint.path} element={endpoint.page} />
             )
           })}
+          <Route path={"/detail/:id"} element={<Detail />} />
         </Routes>
       </Provider>
     </Router>

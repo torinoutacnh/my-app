@@ -50,7 +50,7 @@ const NFTCard = (metadatadata: metadata.MetadataData) => {
                                         Buy
                                     </Button>
                                     <Button variant="warning" style={{ marginLeft: 10 }}>
-                                        <Link to={"/".concat(metadatadata.mint)} className="link-none">Detail</Link>
+                                        <Link to={"/detail/".concat(metadatadata.mint)} className="link-none">Detail</Link>
                                     </Button>
                                 </div>
                             </Card.Body>

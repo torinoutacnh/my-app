@@ -1,5 +1,4 @@
-import NFT from "./aboutNFT/NFT";
-import Detail from "./detailNFT/Detail";
+import NFT from "./aboutNFT/Nft";
 import Home from "./home/Home";
 
 export const Endpoints: IEndpoint[] = [
@@ -7,11 +6,6 @@ export const Endpoints: IEndpoint[] = [
         name: "Home",
         path: "/",
         page: <Home />,
-    },
-    {
-        name: "Detail",
-        path: "/:id",
-        page: <Detail />,
     },
     {
         name: "NFT",
