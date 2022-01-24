@@ -41,6 +41,9 @@ const Detail: FC = () => {
                             )
                         })}
                         <Row md={1}>
+                            <h5 style={{ wordWrap: 'break-word' }}>{nftdata?.name}</h5>
+                        </Row>
+                        <Row md={1}>
                             <h5>Decription</h5>
                             <p style={{ wordWrap: 'break-word' }}>{nftdata?.description}</p>
                         </Row>
