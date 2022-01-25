@@ -46,13 +46,13 @@ const NFTCard = (metadatadata: metadata.MetadataData) => {
                                     )
                                 })} */}
                                 <div style={{ marginTop: 20 }}>
-                                    <Button style={{ backgroundColor: '#DB7093' }}
+                                    {/* <Button style={{ backgroundColor: '#DB7093' }}
                                         onClick={() => buyBySFT(endpoint, wallets, metadatadata.mint, 20)}
                                     >
                                         Buy
 
-                                    </Button>
-                                    <Button variant="warning" style={{ marginLeft: 10 }}>
+                                    </Button> */}
+                                    <Button variant="primary" style={{ marginLeft: 10, color: 'white' }}>
                                         <Link to={"/detail/".concat(metadatadata.mint)} className="link-none">Detail</Link>
                                     </Button>
                                 </div>
@@ -76,8 +76,8 @@ const Home: FC = () => {
         <div>
             <h1>Collections</h1>
 
-            <CardGroup style={{ marginTop: '80px' }}>
-                <Row md={3} className="g-4">
+            <CardGroup>
+                <Row md={3} className="g-4"  style={{ margin: '20px' }} >
                     {metadatas.map((data, idx) => (
                         <NFTCard {...data} key={idx} />
                     ))}

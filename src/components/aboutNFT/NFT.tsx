@@ -21,8 +21,8 @@ const NFTCard = (metadatadata: metadata.MetadataData) => {
             {endpoint => (
                 <WalletContext.Consumer>
                     {wallets => (
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={nftdata.image} />
+                        <Card style={{ width: '18rem ', borderRadius: '20px', margin: '12px', backgroundColor: 'burlywood'  }}>
+                            <Card.Img style={{ paddingTop: '15px' }} src={nftdata.image} />
                             <Card.Body>
                                 <Card.Title>{nftdata.name}</Card.Title>
                                 {/* <Card.Subtitle>Symbol : {nftdata.symbol}</Card.Subtitle> */}
@@ -64,7 +64,7 @@ const NFT: FC = () => {
         <div>
             <h1>My Collections</h1>
             <CardGroup>
-                <Row md={3} className="g-4">
+                <Row md={3} className="g-4" style={{ margin: '20px'}}>
                     {metadatas.map((data, idx) => (
                         <NFTCard {...data} key={idx} />
                     ))}

@@ -8,9 +8,9 @@ import './Nav.css';
 
 export default function TopNav() {
     return (
-        <Navbar  style={{ backgroundColor: '#EDC7B7', fontWeight: 'bolder', fontSize: 20 }} expand="md" sticky='top'>
+        <Navbar style={{ backgroundColor: '#EDC7B7', fontWeight: 'bolder', fontSize: 20 }} expand="md" sticky='top'>
             <Container>
-               <Nav> 
+           
                <Navbar.Brand href="/">
                     <img
                         src="https://res.cloudinary.com/design123/image/upload/v1642135260/fboqwxpx15wf9p7hx9to.png"
@@ -22,7 +22,7 @@ export default function TopNav() {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
+                    <Nav  variant="pills"  className="me-auto">
                         {Endpoints.map((endpoint, index) => {
                             if (endpoint.isNav) {
                                 return (
@@ -43,7 +43,7 @@ export default function TopNav() {
                         <WalletMultiButton className='button-style' />
                     </Nav>
                 </Navbar.Collapse>
-               </Nav>
+        
             </Container>
         </Navbar>
     )
