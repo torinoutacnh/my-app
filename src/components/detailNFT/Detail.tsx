@@ -65,7 +65,7 @@ const Detail: FC = () => {
                     </Col>
 
                 </Row>
-                <Row style={{}}>
+                <Row>
                     <Col md={6}>
                         <Button style={{ width: '100%' }} onClick={() => buyBySFT(connectionContext, wallets, id, 20)} >Buy</Button>
                     </Col>
