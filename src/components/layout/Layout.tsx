@@ -9,12 +9,8 @@ function Layout(props: any) {
     return (
         <div className="layout-background">
             <TopNav />
-            <Container >
-            
-                        {/* <div style = {{marginLeft: '110px',marginTop: '80px'}}> */}
-                        {props.children}
-                        {/* </div>            */}
-            
+            <Container className="layout-content" >
+                {props.children}
             </Container>
             <Footer />
         </div>
