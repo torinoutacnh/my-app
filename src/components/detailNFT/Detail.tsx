@@ -32,8 +32,8 @@ const Detail: FC = () => {
                 <Container fluid style={{ marginTop: '30px' }}>
                     <Row>
                         <Col md={6}>
-                            <div style={{ borderRadius: '30px' }}>
-                                <img src={nftdata?.image} alt="nft" className="imgfix" />
+                            <div  style={{ borderRadius: '30px',textAlign: 'center' }}>
+                                <img src={nftdata?.image} style={{ width: '47%'}}alt="nft"  />
                             </div>
                             <div style={{ borderRadius: '30px', paddingTop: '30px' }}>
                                 <Row md={1} >
