@@ -13,9 +13,9 @@ export default function TopNav() {
            
                <Navbar.Brand href="/">
                     <img
-                        src="https://res.cloudinary.com/design123/image/upload/v1642135260/fboqwxpx15wf9p7hx9to.png"
-                        width="100%"
-                        height="50"
+                        src="../text-logo.png"
+                        width="200"
+                        height="30"
                         className="d-inline-block align-top"
                         alt="FitnessVR"
                     />
