@@ -227,7 +227,7 @@ export const buyBySFT = async (endpoint: ConnectionContextState, wallets: Wallet
         const mintPubkey = new web3.PublicKey(tokenmint);
         const transferNFT = await transferTokenInstruction(systemAddress.publicKey, wallets.publicKey, endpoint.connection, mintPubkey, 0);
         instruction.push(...transferNFT);
-        const transferSFT = await transferTokenInstruction(wallets.publicKey, systemAddress.publicKey, endpoint.connection, sftAddress, amount);
+        const transferSFT = await transferTokenInstruction(wallets.publicKey, systemAddress.publicKey, endpoint.connection, smwAddress, amount);
         instruction.push(...transferSFT);
         await makeTransaction(wallets, endpoint.connection, instruction, true);
     } catch (error) {

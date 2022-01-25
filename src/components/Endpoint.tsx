@@ -16,7 +16,7 @@ export const Endpoints: IEndpoint[] = [
         isNav: false,
     },
     {
-        name: "NFT",
+        name: "My NFT",
         path: "/nft",
         page: <NFT />,
         isNav: true,
