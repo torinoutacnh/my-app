@@ -8,6 +8,8 @@ import { WalletContext, ConnectionContext } from "@solana/wallet-adapter-react";
 
 import { getWalletNFTs, getMetadataDetail } from '../../transactions/nftMetadata'
 import { buyBySFT } from "../../transactions/instruction";
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
 
 import "./Home.css";
 
@@ -19,12 +21,13 @@ const NFTCard = (metadatadata: metadata.MetadataData) => {
         getMetadataDetail(metadatadata).then((data) => { setNFTData(data); })
     }, [metadatadata]);
     return (
+    
         <ConnectionContext.Consumer>
             {endpoint => (
                 <WalletContext.Consumer>
                     {wallets => (
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={nftdata.image} />
+                        <Card style={{ width: '18rem',borderRadius : '20px',margin: '12px', backgroundColor: 'burlywood' }}>
+                            <Card.Img  style={{paddingTop: '15px'}} src={nftdata.image} />
                             <Card.Body>
                                 <Card.Title>{nftdata.name}</Card.Title>
                                 {/* <Card.Subtitle>Symbol : {nftdata.symbol}</Card.Subtitle> */}
@@ -44,15 +47,15 @@ const NFTCard = (metadatadata: metadata.MetadataData) => {
                                         </Card.Subtitle>
                                     )
                                 })} */}
-                                <div style={{ marginTop: 20, textAlign: 'center' }}>
-                                    <Button variant="primary"
+                                <div style={{ marginTop: 20}}>
+                                    <Button style= {{backgroundColor: '#DB7093'}}
                                         onClick={() => buyBySFT(endpoint, wallets, metadatadata.mint, 20)}
                                     >
-                                        <i className="fa fa-create"></i>
-                                        Buy
+                                       Buy
+                                       
                                     </Button>
-                                    <Button variant="warning" style={{ marginLeft: 10, color: '#BAB2B5' }}>
-                                        <Link to={"/detail/".concat(metadatadata.mint)} className="link-none">Detail</Link>
+                                    <Button variant="warning" style={{ marginLeft: 10 }}>
+                                     <Link to={"/detail/".concat(metadatadata.mint)} className="link-none">Detail</Link>                                    
                                     </Button>
                                 </div>
                             </Card.Body>
@@ -74,7 +77,8 @@ const Home: FC = () => {
     return (
         <div>
             <h1>Collections</h1>
-            <CardGroup>
+
+            <CardGroup style ={{marginTop: '80px'}}>
                 <Row md={3} className="g-4">
                     {metadatas.map((data, idx) => (
                         <NFTCard {...data} key={idx} />

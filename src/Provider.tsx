@@ -46,7 +46,9 @@ export const Provider: FC = (props) => {
             <WalletProvider wallets={wallets} autoConnect>
                 <WalletModalProvider>
                     <Layout>
-                        {props.children}
+                     
+                            {props.children}
+                      
                     </Layout>
                 </WalletModalProvider>
             </WalletProvider>

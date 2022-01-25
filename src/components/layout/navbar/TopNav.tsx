@@ -25,7 +25,7 @@ export default function TopNav() {
                         {Endpoints.map((endpoint, index) => {
                             if (endpoint.isNav) {
                                 return (
-                                    <Nav.Link style={{ color: '#AC3B61', paddingLeft: '10px' }} key={index} href={endpoint.path}>{endpoint.name}</Nav.Link>
+                                    <Nav.Link style={{ color: 'Black', paddingLeft: '10px' }} key={index} href={endpoint.path}>{endpoint.name}</Nav.Link>
                                 )
                             }
                             return null;
