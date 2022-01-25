@@ -29,49 +29,64 @@ const Detail: FC = () => {
     return (
         <div>
             {metadatadata && nftdata &&
-                <Container fluid style={{marginTop: '30px',border: '1.5px solid black'}}>
+                <Container fluid style={{ marginTop: '30px' }}>
                     <Row>
                         <Col md={6}>
-                            <img src={nftdata?.image} alt="nft" className="imgfix" />
-                        </Col>
-                        <Col md={6}>
-                            <Row md={1}>
-                                <h2 style={{ wordWrap: 'break-word',paddingTop:'15px',fontWeight:'bold'}}>{nftdata?.name}</h2>
-                            </Row>
-                            <Row md={1}>
-                                
-                                <h5 style={{paddingTop: '10px'}}>Decription</h5>
-                                <p style={{ wordWrap: 'break-word'}}>{nftdata?.description}</p>
-                            </Row>
-                            <Row md={1} >
-                                <h5>Traits</h5>
-                                <Table >
-                                    <tbody>
-                                        {nftdata?.attributes?.map((attribute: any, idx: number) => {
-                                            return (
-                                                <tr key={idx}>
-                                                    <td>{attribute.trait_type}</td>
-                                                    <td>{attribute.value}</td>
-                                                </tr>
-                                            )
-                                        })}
-                                    </tbody>
-                                </Table>
-                            </Row>
-                            <h5>Create by</h5>
-                            {metadatadata && metadatadata.data.creators.map((creator, idx) => {
-                                return (
-                                    <p key={idx} style={{ wordWrap: 'break-word' }}>{creator.address}</p>
-                                )
-                            })}
-                        </Col>
+                            <div style={{ borderRadius: '30px' }}>
+                                <img src={nftdata?.image} alt="nft" className="imgfix" />
+                            </div>
+                            <div style={{ borderRadius: '30px', paddingTop: '30px' }}>
+                                <Row md={1} >
+                                    <h5 style={{ fontWeight: 'bold' }}>Traits</h5>
+                                    <Table striped bordered hover >
+                                        <tbody>
+                                            {nftdata?.attributes?.map((attribute: any, idx: number) => {
+                                                return (
+                                                    <tr key={idx}>
+                                                        <td>{attribute.trait_type}</td>
+                                                        <td>{attribute.value}</td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                    </Table>
+                                </Row>
+                            </div>
 
-                    </Row>
-                    <Row>
-                        <Col md={6} style={{ textAlign: "center", paddingBottom: '30px' }}>
-                            <Button  onClick={() => buyBySFT(connectionContext, wallets, id, 20)} >Buy</Button>
                         </Col>
+                        <Col md={6}>
+                            <Row md={1}>
+                                <h2 style={{ wordWrap: 'break-word', paddingTop: '15px', fontWeight: 'bold' }}>{nftdata?.name}</h2>
+                            </Row>
+                            <Row md={1}>
+
+                                <h5 style={{ paddingTop: '10px', fontWeight: 'bold' }}>Decription</h5>
+                                <p style={{ wordWrap: 'break-word' }}>{nftdata?.description}</p>
+                            </Row>
+                            <Row md={1}>
+                                <h5 style={{ fontWeight: 'bold' }}>Price</h5>
+                                <p style={{ wordWrap: 'break-word', paddingTop: '15px' }}>{nftdata?.price} 20SFT</p>
+                            </Row>
+                            <Row md={1}>
+                                <h5 style={{ fontWeight: 'bold' }}>Create by</h5>
+                                {metadatadata && metadatadata.data.creators.map((creator, idx) => {
+                                    return (
+                                        <p key={idx} style={{ wordWrap: 'break-word' }}>{creator.address}</p>
+                                    )
+                                })}
+                            </Row>
+                            
+                            <Row md={2} style={{ paddingLeft: '15px',paddingTop:'30px'}}>
+                                <Button variant="primary" onClick={() => buyBySFT(connectionContext, wallets, id, 20)} >Buy</Button>
+                            </Row>
+                        </Col>
+                        {/* <Row>
+                            <Col md={6} style={{ textAlign: "center", paddingBottom: '30px' }}>
+                               
+                            </Col>
+                        </Row> */}
                     </Row>
+
                 </Container>}
         </div>
     )
