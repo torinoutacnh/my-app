@@ -1,8 +1,5 @@
 .layout-body {
-	padding: 50px;
-	margin: 10px;
 	min-height: 85vh;
-	max-width: fit-content;
 }
 
 .layout-background {
