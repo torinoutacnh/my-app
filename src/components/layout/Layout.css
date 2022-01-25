@@ -1,8 +1,162 @@
 .layout-body {
-	min-height: 78vh;
+	min-height: 85vh;
 	font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
 .layout-background {
 	background-color: #efdad7;
+}
+
+.text-center {
+	text-align: center;
+}
+.w-100 {
+	width: 100%;
+}
+.w-75 {
+	width: 75%;
+}
+.w-50 {
+	width: 50%;
+}
+.mt-150 {
+	margin-top: 150px;
+}
+.mt-100 {
+	margin-top: 100px;
+}
+.mt-50 {
+	margin-top: 50px;
+}
+.mt-30 {
+	margin-top: 30px;
+}
+.text-style-1 {
+	/*  larger font size, more shadow distance  */
+	text-shadow: 0.1em 0.1em 0 hsl(200 50% 30%);
+}
+
+.text-style-2 {
+	color: #f7cfc8;
+	font-family: "Luckiest Guy", cursive;
+	letter-spacing: 10px;
+	text-align: center;
+	text-shadow: -6px -6px #4d84c8, -5px -5px #4d84c8, -4px -4px #4d84c8,
+		-3px -3px #4d84c8, -2px -2px #4d84c8, -1px -1px #4d84c8, 1px 1px #4d84c8,
+		2px 2px #4d84c8, 3px 3px #4d84c8, 4px 4px #4d84c8, 5px 5px #4d84c8,
+		6px 6px #4d84c8, 7px 7px #4d84c8, 8px 8px #4d84c8, 9px 9px #4d84c8,
+		10px 10px #4d84c8, 11px 11px #4d84c8, 12px 12px #4d84c8, 13px 13px #4d84c8,
+		14px 14px #4d84c8, 15px 15px #4d84c8, 16px 16px #4d84c8, 17px 17px #4d84c8,
+		18px 18px #4d84c8, 19px 19px #4d84c8, 20px 20px #4d84c8, 21px 21px #4d84c8,
+		22px 22px #4d84c8, 23px 23px #4d84c8, 24px 24px #4d84c8, 25px 25px #4d84c8,
+		26px 26px #4d84c8, 27px 27px #4d84c8, 25px 25px #4d84c8, 28px 28px #4d84c8,
+		29px 29px #4d84c8, 30px 30px #4d84c8, 31px 31px #4d84c8, 32px 32px #4d84c8,
+		33px 33px #4d84c8, 34px 34px #4d84c8, 35px 35px #4d84c8, 36px 36px #4d84c8,
+		37px 37px #4d84c8, 38px 38px #4d84c8, 39px 39px #4d84c8, 40px 40px;
+	width: 100%;
+}
+
+.text-style-3 {
+	/* font-size: 144pt; */
+	font-family: "Luckiest Guy";
+	color: #fff;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-shadow: 0px -6px 0 #212121, 0px -6px 0 #212121, 0px 6px 0 #212121,
+		0px 6px 0 #212121, -6px 0px 0 #212121, 6px 0px 0 #212121, -6px 0px 0 #212121,
+		6px 0px 0 #212121, -6px -6px 0 #212121, 6px -6px 0 #212121, -6px 6px 0 #212121,
+		6px 6px 0 #212121, -6px 18px 0 #212121, 0px 18px 0 #212121, 6px 18px 0 #212121,
+		0 19px 1px rgba(0, 0, 0, 0.1), 0 0 6px rgba(0, 0, 0, 0.1),
+		0 6px 3px rgba(0, 0, 0, 0.3), 0 12px 6px rgba(0, 0, 0, 0.2),
+		0 18px 18px rgba(0, 0, 0, 0.25), 0 24px 24px rgba(0, 0, 0, 0.2),
+		0 36px 36px rgba(0, 0, 0, 0.15);
+}
+
+.text-style-4 {
+	text-align: center;
+	width: 100%;
+	margin: 0px auto;
+	color: #d173c1;
+	letter-spacing: 5px;
+	top: 50%;
+	margin-top: -40px;
+
+	text-shadow: -1px -1px 0px #dba69e, 3px 3px 0px #dba69e, 6px 6px 0px #d16d5d;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap");
+
+.text-style-5 {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: block;
+	color: #cf1b1b;
+	letter-spacing: 8px;
+	cursor: pointer;
+}
+.text-style-5::before {
+	content: "PRATHAM";
+	position: absolute;
+	color: transparent;
+	background-image: repeating-linear-gradient(
+		45deg,
+		transparent 0,
+		transparent 2px,
+		white 2px,
+		white 4px
+	);
+	-webkit-background-clip: text;
+	background-clip: text;
+	top: 0px;
+	left: 0;
+	z-index: -1;
+	transition: 1s;
+}
+
+.text-style-5::after {
+	content: "PRATHAM";
+	position: absolute;
+	color: transparent;
+	background-image: repeating-linear-gradient(
+		135deg,
+		transparent 0,
+		transparent 2px,
+		white 2px,
+		white 4px
+	);
+	-webkit-background-clip: text;
+	background-clip: text;
+	top: 0px;
+	left: 0px;
+	transition: 1s;
+}
+
+.text-style-5:hover:before {
+	top: 10px;
+	left: 10px;
+}
+
+.text-style-5:hover:after {
+	top: -10px;
+	left: -10px;
+}
+
+.bg-gardient-1 {
+	background: linear-gradient(to right, rgb(200, 61, 255), rgb(46, 255, 150));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.bg-gardient-2 {
+	background: linear-gradient(to right, rgb(97, 61, 255), rgb(46, 255, 203));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.bg-btn-primary {
+	background: linear-gradient(to right, rgb(255, 194, 61), rgb(255, 112, 46));
 }

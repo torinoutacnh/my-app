@@ -7,7 +7,7 @@ import { useConnection } from "@solana/wallet-adapter-react";
 import { WalletContext, ConnectionContext } from "@solana/wallet-adapter-react";
 
 import { getWalletNFTs, getMetadataDetail } from '../../transactions/nftMetadata'
-import { buyBySFT } from "../../transactions/instruction";
+import { buyBySMW } from "../../transactions/instruction";
 
 import "./Home.css";
 
@@ -47,14 +47,16 @@ const NFTCard = (metadatadata: metadata.MetadataData) => {
                                 })} */}
                                 <div style={{ marginTop: 20 }}>
                                     {/* <Button style={{ backgroundColor: '#DB7093' }}
-                                        onClick={() => buyBySFT(endpoint, wallets, metadatadata.mint, 20)}
+                                        onClick={() => buyBySMW(endpoint, wallets, metadatadata.mint, 20)}
                                     >
                                         Buy
 
                                     </Button> */}
-                                    <Button variant="primary" style={{ marginLeft: 10, color: 'white' }}>
-                                        <Link to={"/detail/".concat(metadatadata.mint)} className="link-none">Detail</Link>
-                                    </Button>
+                                    <Link to={"/detail/".concat(metadatadata.mint)} className="link-none">
+                                        <Button variant="primary" className="text-center w-100">
+                                            Detail
+                                        </Button>
+                                    </Link>
                                 </div>
                             </Card.Body>
                         </Card>
@@ -77,7 +79,7 @@ const Home: FC = () => {
             <h1>Collections</h1>
 
             <CardGroup>
-                <Row md={3} className="g-4"  style={{ margin: '20px' }} >
+                <Row md={3} className="g-4" style={{ margin: '20px' }} >
                     {metadatas.map((data, idx) => (
                         <NFTCard {...data} key={idx} />
                     ))}

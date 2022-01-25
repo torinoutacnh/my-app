@@ -11,3 +11,10 @@
 	font-weight: "bolder";
 	font-size: 20px;
 }
+.bg-nav-primary {
+	background: linear-gradient(to right, rgb(184, 61, 255), rgb(46, 143, 255));
+	padding-left: 15px;
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}

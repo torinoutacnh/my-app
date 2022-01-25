@@ -10,8 +10,8 @@ export default function TopNav() {
     return (
         <Navbar style={{ backgroundColor: '#EDC7B7', fontWeight: 'bolder', fontSize: 20 }} expand="md" sticky='top'>
             <Container>
-           
-               <Navbar.Brand href="/">
+
+                <Navbar.Brand href="/">
                     <img
                         src="../text-logo.png"
                         width="200"
@@ -22,11 +22,11 @@ export default function TopNav() {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav  variant="pills"  className="me-auto">
+                    <Nav variant="pills" className="me-auto">
                         {Endpoints.map((endpoint, index) => {
                             if (endpoint.isNav) {
                                 return (
-                                    <Nav.Link style={{ color: 'Black', paddingLeft: '10px' }} key={index} href={endpoint.path}>{endpoint.name}</Nav.Link>
+                                    <Nav.Link key={index} href={endpoint.path}><span className='bg-nav-primary'>{endpoint.name}</span></Nav.Link>
                                 )
                             }
                             return null;
@@ -39,11 +39,11 @@ export default function TopNav() {
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown> */}
                     </Nav>
-                    <Nav className="justify-content-end" activeKey="/home">
+                    <Nav className="justify-content-end">
                         <WalletMultiButton className='button-style' />
                     </Nav>
                 </Navbar.Collapse>
-        
+
             </Container>
         </Navbar>
     )
