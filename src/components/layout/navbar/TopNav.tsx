@@ -8,9 +8,10 @@ import './Nav.css';
 
 export default function TopNav() {
     return (
-        <Navbar style={{ backgroundColor: '#EDC7B7', fontWeight: 'bolder', fontSize: 20 }} expand="md" sticky='top'>
+        <Navbar  style={{ backgroundColor: '#EDC7B7', fontWeight: 'bolder', fontSize: 20 }} expand="md" sticky='top'>
             <Container>
-                <Navbar.Brand href="/">
+               <Nav> 
+               <Navbar.Brand href="/">
                     <img
                         src="https://res.cloudinary.com/design123/image/upload/v1642135260/fboqwxpx15wf9p7hx9to.png"
                         width="100%"
@@ -42,6 +43,7 @@ export default function TopNav() {
                         <WalletMultiButton className='button-style' />
                     </Nav>
                 </Navbar.Collapse>
+               </Nav>
             </Container>
         </Navbar>
     )
