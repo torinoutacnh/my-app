@@ -3,13 +3,11 @@ import * as web3 from "@solana/web3.js";
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
 import { CardGroup, Card, Button, Row } from "react-bootstrap";
 import { Link } from 'react-router-dom'
-import { ConnectionContextState, useConnection, WalletContextState } from "@solana/wallet-adapter-react";
+import { useConnection } from "@solana/wallet-adapter-react";
 import { WalletContext, ConnectionContext } from "@solana/wallet-adapter-react";
 
 import { getWalletNFTs, getMetadataDetail } from '../../transactions/nftMetadata'
 import { buyBySFT } from "../../transactions/instruction";
-import Container from 'react-bootstrap/Container'
-import Col from 'react-bootstrap/Col'
 
 import "./Home.css";
 
@@ -21,13 +19,13 @@ const NFTCard = (metadatadata: metadata.MetadataData) => {
         getMetadataDetail(metadatadata).then((data) => { setNFTData(data); })
     }, [metadatadata]);
     return (
-    
+
         <ConnectionContext.Consumer>
             {endpoint => (
                 <WalletContext.Consumer>
                     {wallets => (
-                        <Card style={{ width: '18rem',borderRadius : '20px',margin: '12px', backgroundColor: 'burlywood' }}>
-                            <Card.Img  style={{paddingTop: '15px'}} src={nftdata.image} />
+                        <Card style={{ width: '18rem', borderRadius: '20px', margin: '12px', backgroundColor: 'burlywood' }}>
+                            <Card.Img style={{ paddingTop: '15px' }} src={nftdata.image} />
                             <Card.Body>
                                 <Card.Title>{nftdata.name}</Card.Title>
                                 {/* <Card.Subtitle>Symbol : {nftdata.symbol}</Card.Subtitle> */}
@@ -47,15 +45,15 @@ const NFTCard = (metadatadata: metadata.MetadataData) => {
                                         </Card.Subtitle>
                                     )
                                 })} */}
-                                <div style={{ marginTop: 20}}>
-                                    <Button style= {{backgroundColor: '#DB7093'}}
+                                <div style={{ marginTop: 20 }}>
+                                    <Button style={{ backgroundColor: '#DB7093' }}
                                         onClick={() => buyBySFT(endpoint, wallets, metadatadata.mint, 20)}
                                     >
-                                       Buy
-                                       
+                                        Buy
+
                                     </Button>
                                     <Button variant="warning" style={{ marginLeft: 10 }}>
-                                     <Link to={"/detail/".concat(metadatadata.mint)} className="link-none">Detail</Link>                                    
+                                        <Link to={"/detail/".concat(metadatadata.mint)} className="link-none">Detail</Link>
                                     </Button>
                                 </div>
                             </Card.Body>
@@ -78,7 +76,7 @@ const Home: FC = () => {
         <div>
             <h1>Collections</h1>
 
-            <CardGroup style ={{marginTop: '80px'}}>
+            <CardGroup style={{ marginTop: '80px' }}>
                 <Row md={3} className="g-4">
                     {metadatas.map((data, idx) => (
                         <NFTCard {...data} key={idx} />
