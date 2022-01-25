@@ -19,6 +19,7 @@ const Detail: FC = () => {
     const [nftdata, setNftdata] = useState<any>();
     const [walletToast, setWalletToast] = useState(false);
     const [balanceToast, setBalanceToast] = useState(false);
+    const [solbalanceToast, setSolBalanceToast] = useState(false);
     const connectionContext = useConnection();
     const wallets = useWallet();
 
@@ -29,7 +30,7 @@ const Detail: FC = () => {
         }
         const solbalance = await connectionContext.connection.getBalance(wallets.publicKey, 'confirmed')
         if (solbalance < 0.0005 * (10 ** 9)) {
-            setBalanceToast(true);
+            setSolBalanceToast(true);
             return;
         }
         const balance = await getCustomToken(connectionContext.connection, smwAddress, wallets.publicKey)
@@ -113,7 +114,8 @@ const Detail: FC = () => {
                         </Row> */}
                     </Row>
                     <CustomToast title="Error" message="Please connect wallet before buy" show={walletToast} setShow={setWalletToast} />
-                    <CustomToast title="Error" message="Your balance is not enough" show={balanceToast} setShow={setBalanceToast} />
+                    <CustomToast title="Error" message="Your SMW is not enough" show={balanceToast} setShow={setBalanceToast} />
+                    <CustomToast title="Error" message="Your Sol is not enough" show={solbalanceToast} setShow={setSolBalanceToast} />
                 </Container>}
         </div>
     )
