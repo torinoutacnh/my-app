@@ -31,7 +31,7 @@ const Detail: FC = () => {
             {metadatadata && nftdata && <Container fluid>
                 <Row>
                     <Col md={6}>
-                        <img src={nftdata?.image} alt="nft" style={{ maxWidth: '300px' }} />
+                        <img src={nftdata?.image} alt="nft" className="imgfix" />
                     </Col>
                     <Col md={6}>
                         <h2>Create by</h2>
@@ -65,7 +65,7 @@ const Detail: FC = () => {
                     </Col>
 
                 </Row>
-                <Row>
+                <Row style={{}}>
                     <Col md={6}>
                         <Button style={{ width: '100%' }} onClick={() => buyBySFT(connectionContext, wallets, id, 20)} >Buy</Button>
                     </Col>
