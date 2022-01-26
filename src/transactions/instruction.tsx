@@ -249,3 +249,5 @@ export const buyBySFT = async (endpoint: ConnectionContextState, wallets: Wallet
         console.log(error);
     }
 }
+
+

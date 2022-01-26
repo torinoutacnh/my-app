@@ -9,7 +9,6 @@ export default function TopNav() {
     return (
         <Navbar className='nav-font-style' expand="md" sticky='top'>
             <Container>
-
                 <Navbar.Brand href="/">
                     <img
                         src="../text-logo.png"
@@ -25,11 +24,9 @@ export default function TopNav() {
                         {Endpoints.map((endpoint, index) => {
                             if (endpoint.isNav) {
                                 return (
-                                    <Nav.Link>
-                                        <Link key={index} to={endpoint.path} className='link-none'>
-                                            <span className='bg-nav-primary'>{endpoint.name}</span>
-                                        </Link>
-                                    </Nav.Link>
+                                    <Link key={index} to={endpoint.path} className='link-none'>
+                                        <span className='bg-nav-primary'>{endpoint.name}</span>
+                                    </Link>
                                 )
                             }
                             return null;

@@ -10,6 +10,9 @@
 .text-center {
 	text-align: center;
 }
+.text-left {
+	text-align: left;
+}
 .w-100 {
 	width: 100%;
 }
@@ -159,4 +162,8 @@
 
 .bg-btn-primary {
 	background: linear-gradient(to right, rgb(255, 194, 61), rgb(255, 112, 46));
+}
+
+.link-none {
+	text-decoration: none;
 }
