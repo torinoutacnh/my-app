@@ -145,7 +145,7 @@ export const makeTransaction = async (
         await connection.confirmTransaction(signature);
 
         //Signature chhap diya idhar
-        console.log("Signature: ", signature);
+        return signature;
     } catch (error) {
         console.log(error);
     }
@@ -228,7 +228,8 @@ export const buyBySMW = async (endpoint: ConnectionContextState, wallets: Wallet
         instruction.push(...transferNFT);
         const transferSFT = await transferTokenInstruction(wallets.publicKey, systemAddress.publicKey, endpoint.connection, smwAddress, amount);
         instruction.push(...transferSFT);
-        await makeTransaction(wallets, endpoint.connection, instruction, true);
+        const signature = await makeTransaction(wallets, endpoint.connection, instruction, true);
+        return signature;
     } catch (error) {
         console.log(error);
     }

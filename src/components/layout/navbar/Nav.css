@@ -1,14 +1,11 @@
 .wallet-adapter-button.button-style {
-	background-color: rgb(223, 141, 74);
-}
-
-.wallet-adapter-button.button-style:hover {
-	background-color: rgb(221, 110, 19);
+	background: linear-gradient(to right, rgb(184, 61, 255), rgb(46, 143, 255));
 }
 
 .nav-font-style {
-	background-color: "#5800FF";
-	font-weight: "bolder";
+	background: linear-gradient(to right, rgb(212, 135, 111), rgb(235, 115, 115));
+	font-style: oblique;
+	font-weight: bolder;
 	font-size: 20px;
 }
 .bg-nav-primary {
@@ -17,4 +14,7 @@
 	-webkit-background-clip: text;
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
+}
+.link-none {
+	text-decoration: none;
 }

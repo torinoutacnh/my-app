@@ -24,22 +24,26 @@ const Detail: FC = () => {
     const wallets = useWallet();
 
     const handleBuy = async () => {
-        if (!wallets.connected) {
-            setWalletToast(true);
-            return;
+        try {
+            if (!wallets.connected) {
+                setWalletToast(true);
+                return;
+            }
+            const solbalance = await connectionContext.connection.getBalance(wallets.publicKey, 'confirmed')
+            if (solbalance < 0.0005 * (10 ** 9)) {
+                setSolBalanceToast(true);
+                return;
+            }
+            const balance = await getCustomToken(connectionContext.connection, smwAddress, wallets.publicKey)
+            if (balance.value.uiAmount < 20) {
+                setBalanceToast(true);
+                return;
+            }
+            buyBySMW(connectionContext, wallets, id, 20).then((data) => data ? navigate("/nft", { replace: true }) : null);
+
+        } catch (error) {
+            console.log(error);
         }
-        const solbalance = await connectionContext.connection.getBalance(wallets.publicKey, 'confirmed')
-        if (solbalance < 0.0005 * (10 ** 9)) {
-            setSolBalanceToast(true);
-            return;
-        }
-        const balance = await getCustomToken(connectionContext.connection, smwAddress, wallets.publicKey)
-        if (balance.value.uiAmount < 20) {
-            setBalanceToast(true);
-            return;
-        }
-        await buyBySMW(connectionContext, wallets, id, 20);
-        navigate("/nft", { replace: true })
     }
     useEffect(() => {
         getWalletNFTs(connectionContext.connection, systemAddress.publicKey).then(data => {

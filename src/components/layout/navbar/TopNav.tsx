@@ -1,14 +1,13 @@
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
-import {
-    WalletMultiButton,
-} from '@solana/wallet-adapter-react-ui';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { Link } from 'react-router-dom';
 import { Endpoints } from '../../Endpoint';
 
 import './Nav.css';
 
 export default function TopNav() {
     return (
-        <Navbar style={{ backgroundColor: '#EDC7B7', fontWeight: 'bolder', fontSize: 20 }} expand="md" sticky='top'>
+        <Navbar className='nav-font-style' expand="md" sticky='top'>
             <Container>
 
                 <Navbar.Brand href="/">
@@ -26,7 +25,11 @@ export default function TopNav() {
                         {Endpoints.map((endpoint, index) => {
                             if (endpoint.isNav) {
                                 return (
-                                    <Nav.Link key={index} href={endpoint.path}><span className='bg-nav-primary'>{endpoint.name}</span></Nav.Link>
+                                    <Nav.Link>
+                                        <Link key={index} to={endpoint.path} className='link-none'>
+                                            <span className='bg-nav-primary'>{endpoint.name}</span>
+                                        </Link>
+                                    </Nav.Link>
                                 )
                             }
                             return null;
