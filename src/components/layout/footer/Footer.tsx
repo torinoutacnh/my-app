@@ -1,5 +1,4 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { isMobile } from 'react-device-detect';
 
 import './Footer.css'
 
@@ -10,18 +9,18 @@ export default function Footer() {
                 <Col>
                     <img src="/logo_lg.png" alt="" />
                 </Col>
-                <Col className={isMobile ? "" : "text-left"}>
+                <Col className="text-left">
                     <h2 style={{ marginTop: 20 }}>Quick Links</h2>
                     <div style={{ fontSize: 15, lineHeight: 0.8 }}>
-                        <p><a className="link-none" href="https://fitnessvr.io/#About">About</a></p>
-                        <p><a className="link-none" href="https://fitnessvr.io/#Features">Features</a></p>
-                        <p><a className="link-none" href="https://fitnessvr.io/#Gameplay">Gameplay</a></p>
-                        <p><a className="link-none" href="https://fitnessvr.io/#Technologies">Technologies</a></p>
-                        <p><a className="link-none" href="https://fitnessvr.io/#Tokenomics">Tokenomics</a></p>
-                        <p><a className="link-none" href="https://fitnessvr.io/#Roadmap">Roadmap</a></p>
+                        <p><a className="link-none" target={"_blank"} rel="noreferrer" href="https://fitnessvr.io/#About">About</a></p>
+                        <p><a className="link-none" target={"_blank"} rel="noreferrer" href="https://fitnessvr.io/#Features">Features</a></p>
+                        <p><a className="link-none" target={"_blank"} rel="noreferrer" href="https://fitnessvr.io/#Gameplay">Gameplay</a></p>
+                        <p><a className="link-none" target={"_blank"} rel="noreferrer" href="https://fitnessvr.io/#Technologies">Technologies</a></p>
+                        <p><a className="link-none" target={"_blank"} rel="noreferrer" href="https://fitnessvr.io/#Tokenomics">Tokenomics</a></p>
+                        <p><a className="link-none" target={"_blank"} rel="noreferrer" href="https://fitnessvr.io/#Roadmap">Roadmap</a></p>
                     </div>
                 </Col>
-                <Col className={isMobile ? "" : "text-left"}>
+                <Col className="text-left">
                     <h2 style={{ marginTop: 20 }}>Social Media</h2>
                     <div style={{ fontSize: 15, lineHeight: 0.8 }}>
                         <a href="https://www.facebook.com/profile.php?id=100077198979967">
@@ -36,6 +35,6 @@ export default function Footer() {
                     </div>
                 </Col>
             </Row>
-        </Container>
+        </Container >
     )
 }
